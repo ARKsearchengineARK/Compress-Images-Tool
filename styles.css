@@ -1,0 +1,417 @@
+:root {
+    --bg-color: #0f0f23;
+    --text-color: #ffffff;
+    --accent: #00ffcc;
+    --revenue-red: #ff4d4d;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --footer-bg: #f0f0f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--text-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* Banner Styles */
+.banner {
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    padding: 5rem 5%;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+    background-size: 50px 50px;
+    opacity: 0.3;
+}
+
+.banner h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    position: relative;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.banner p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    position: relative;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    position: relative;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#channelInput {
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+#channelInput:focus {
+    outline: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+#searchBtn {
+    padding: 1rem 2.5rem;
+    background: #00cc66;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 204, 102, 0.3);
+    white-space: nowrap;
+}
+
+#searchBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 204, 102, 0.4);
+}
+
+#searchBtn:active {
+    transform: translateY(1px);
+}
+
+/* Loading Indicator */
+.loading {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--accent);
+    animation: spin 1s ease-in-out infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Analytics Grid */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 0 5% 3rem;
+}
+
+.metric-card {
+    background: var(--card-bg);
+    padding: 1.8rem;
+    border-radius: 12px;
+    transition: all 0.3s;
+    border: 1px solid rgba(0, 255, 204, 0.1);
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+}
+
+.metric-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 255, 204, 0.15);
+    border-color: rgba(0, 255, 204, 0.3);
+}
+
+.metric-card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: var(--accent);
+}
+
+.metric-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--accent);
+}
+
+.revenue-card {
+    background: linear-gradient(135deg, var(--revenue-red), #ff6b6b);
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(255, 77, 77, 0.3);
+}
+
+.revenue-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: pulse 6s infinite linear;
+}
+
+@keyframes pulse {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.revenue-card h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.revenue-card p {
+    font-size: 3rem;
+    font-weight: bold;
+    position: relative;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Charts Grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    padding: 0 5% 3rem;
+}
+
+.chart-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.chart-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.chart-title {
+    font-family: 'Orbitron', sans-serif;
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* Footer Styles */
+footer {
+    background: var(--footer-bg);
+    padding: 3rem 5%;
+    text-align: center;
+    color: #333;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #000;
+}
+
+.copyright {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* Error Message */
+.error-message {
+    color: #ff6b6b;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.1rem;
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .banner h1 {
+        font-size: 2.5rem;
+    }
+    
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .banner {
+        padding: 4rem 5%;
+    }
+
+    .banner h1 {
+        font-size: 2rem;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    #searchBtn {
+        width: 100%;
+    }
+
+    .revenue-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .revenue-card p {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        padding: 3rem 5%;
+    }
+
+    .banner h1 {
+        font-size: 1.8rem;
+    }
+
+    .banner p {
+        font-size: 1rem;
+    }
+
+    .metric-card {
+        padding: 1.5rem;
+    }
+
+    .chart-container {
+        padding: 1rem;
+    }
+}
