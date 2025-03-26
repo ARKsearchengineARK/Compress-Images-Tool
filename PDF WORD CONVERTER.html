@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DocMagic Converter - Premium PDF to Word and Word to PDF Converter with Advanced Optimization">
+    <meta name="keywords" content="PDF to Word, Word to PDF, document converter, file conversion">
+    <title>DocMagic Converter - Smart Document Transformation</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5362151075159697"
+    crossorigin="anonymous"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #6C5CE7;
+            --accent-color: #00CEC9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+        }
+
+        .converter-section {
+            padding: 2rem;
+            background: #fff;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .converter-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .file-dropzone {
+            border: 3px dashed var(--primary-color);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-dropzone.active {
+            border-color: var(--accent-color);
+            background: rgba(74, 144, 226, 0.05);
+        }
+
+        .conversion-controls {
+            margin: 2rem 0;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quality-slider {
+            width: 60%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            -webkit-appearance: none;
+        }
+
+        .quality-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .convert-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .convert-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .ad-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .result-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .conversion-controls {
+                flex-direction: column;
+            }
+            
+            .quality-slider {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <h1><i class="fas fa-magic"></i> DocMagic Converter</h1>
+            <p class="tagline">Transform Documents Seamlessly</p>
+
+            <!-- PDF to Word Converter -->
+            <div class="converter-section">
+                <h2><i class="fas fa-file-pdf"></i> PDF to Word Converter</h2>
+                <div class="file-dropzone" id="pdfDropzone">
+                    <p>Drag & Drop PDF File or Click to Upload</p>
+                    <input type="file" id="pdfInput" accept=".pdf" hidden>
+                </div>
+
+                <div class="conversion-controls">
+                    <input type="range" class="quality-slider" id="pdfQuality" min="1" max="10" value="8">
+                    <button class="convert-btn" id="pdfToWordBtn">
+                        <i class="fas fa-sync-alt"></i> Convert to Word
+                    </button>
+                </div>
+
+                <div class="progress-bar" id="pdfProgress">
+                    <div class="progress-fill"></div>
+                </div>
+
+                <div class="result-card" id="pdfResult">
+                    <h3>Converted Document</h3>
+                    <div id="pdfFileInfo"></div>
+                    <button class="convert-btn" id="downloadWordBtn">
+                        <i class="fas fa-download"></i> Download DOCX
+                    </button>
+                </div>
+            </div>
+
+            <!-- Word to PDF Converter -->
+            <div class="converter-section">
+                <h2><i class="fas fa-file-word"></i> Word to PDF Converter</h2>
+                <div class="file-dropzone" id="wordDropzone">
+                    <p>Drag & Drop Word File or Click to Upload</p>
+                    <input type="file" id="wordInput" accept=".doc,.docx" hidden>
+                </div>
+
+                <div class="conversion-controls">
+                    <input type="range" class="quality-slider" id="wordQuality" min="1" max="10" value="8">
+                    <button class="convert-btn" id="wordToPdfBtn">
+                        <i class="fas fa-sync-alt"></i> Convert to PDF
+                    </button>
+                </div>
+
+                <div class="progress-bar" id="wordProgress">
+                    <div class="progress-fill"></div>
+                </div>
+
+                <div class="result-card" id="wordResult">
+                    <h3>Converted Document</h3>
+                    <div id="wordFileInfo"></div>
+                    <button class="convert-btn" id="downloadPdfBtn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="ad-section">
+            <!-- Google AdSense Rectangle Ad -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5362151075159697"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            
+            <div style="margin: 2rem 0">
+                <!-- Google AdSense Square Ad -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-5362151075159697"
+                     data-ad-slot="YOUR_AD_SLOT_ID"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // Common file handling functions
+        function setupFileDropzone(dropzone, input) {
+            dropzone.addEventListener('click', () => input.click());
+            
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropzone.classList.add('active');
+            });
+
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.classList.remove('active');
+            });
+
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('active');
+                input.files = e.dataTransfer.files;
+            });
+        }
+
+        // PDF to Word Conversion
+        const pdfToWordBtn = document.getElementById('pdfToWordBtn');
+        setupFileDropzone(document.getElementById('pdfDropzone'), document.getElementById('pdfInput'));
+
+        pdfToWordBtn.addEventListener('click', async () => {
+            const file = document.getElementById('pdfInput').files[0];
+            if (!file) return;
+
+            // Show progress bar
+            const progressBar = document.getElementById('pdfProgress');
+            progressBar.style.display = 'block';
+            progressBar.querySelector('.progress-fill').style.width = '100%';
+
+            // Simulate conversion process
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Show results
+            document.getElementById('pdfResult').style.display = 'block';
+            document.getElementById('pdfFileInfo').innerHTML = `
+                <p>Original File: ${file.name}</p>
+                <p>Size: ${(file.size/1024).toFixed(2)} KB</p>
+            `;
+        });
+
+        // Word to PDF Conversion
+        const wordToPdfBtn = document.getElementById('wordToPdfBtn');
+        setupFileDropzone(document.getElementById('wordDropzone'), document.getElementById('wordInput'));
+
+        wordToPdfBtn.addEventListener('click', async () => {
+            const file = document.getElementById('wordInput').files[0];
+            if (!file) return;
+
+            // Show progress bar
+            const progressBar = document.getElementById('wordProgress');
+            progressBar.style.display = 'block';
+            progressBar.querySelector('.progress-fill').style.width = '100%';
+
+            // Simulate conversion process
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Show results
+            document.getElementById('wordResult').style.display = 'block';
+            document.getElementById('wordFileInfo').innerHTML = `
+                <p>Original File: ${file.name}</p>
+                <p>Size: ${(file.size/1024).toFixed(2)} KB</p>
+            `;
+        });
+
+        // Initialize AdSense ads
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
